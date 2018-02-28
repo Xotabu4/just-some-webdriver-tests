@@ -18,14 +18,16 @@ function TEST() {
         div.getAttribute('class').then(count)
     })
 
-    $('#SearchbarForm-submitBtn').click().then(count)
+    $('#SearchbarForm-submitBtn').click().then(count).then(()=> {
+        // due to async nature of webdriverjs
+        console.time('wait for results took')
+    })
 
     function waitResultsWithCounter() {
         count()
         return $$('article.PackageCard').count().then(packages => packages == 10)
     }
 
-    console.time('wait for results took')
     return browser.wait(waitResultsWithCounter, WAIT_TIMEOUT).then(() => {
         console.timeEnd('wait for results took')
         console.log('Did at least', counter, 'requests to browser')
