@@ -21,3 +21,9 @@ Two environment variables supported:
 - SELENOID_URL - your selenoid server URL (or selenium hub). My own selenoid server is used by default - 'http://ip-5236.sunline.net.ua:4444/wd/hub'
 
 Test files removed, and regenerated on each `npm test`
+
+I try to calculate approximate number of http requests to server. But lot of requests are not calculated. Actual number will be bigger (x1.5-x2 times)
+
+### Test logic
+
+You can update `test.js` file with any test logic that you want. All generated tests will be the identical (only names differs). All will use same `TEST` function as body.
