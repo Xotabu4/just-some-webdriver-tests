@@ -18,7 +18,7 @@ exports.config = {
         browserName: 'chrome',
         // enableVNC: true,
         shardTestFiles: true,
-        maxInstances: process.env.TESTS_NUM || 10, // Number of test threads
+        maxInstances: process.env.TESTS_NUM || 2, // Number of test threads
         // name: 'AWS LAMBDA'
     },
 

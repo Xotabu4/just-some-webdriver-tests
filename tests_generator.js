@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const TESTS_FOLDER = './tests'
-const TESTS_TO_GENERATE = process.env.TESTS_NUM || 10
+const TESTS_TO_GENERATE = process.env.TESTS_NUM || 2
 
 let files = fs.readdirSync(TESTS_FOLDER)
 console.log('Cleaning up generated tests ...')
