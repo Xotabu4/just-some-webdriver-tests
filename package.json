@@ -1,0 +1,23 @@
+{
+  "name": "just-some-webdriver-tests",
+  "version": "1.0.0",
+  "description": "Dummy webdriver tests for experiments",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "node tests_generator.js",
+    "test": "protractor"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xotabu4/just-some-webdriver-tests.git"
+  },
+  "author": "Oleksandr Khotemskyi <xotabu4@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Xotabu4/just-some-webdriver-tests/issues"
+  },
+  "homepage": "https://github.com/Xotabu4/just-some-webdriver-tests#readme",
+  "dependencies": {
+    "protractor": "^5.3.0"
+  }
+}
