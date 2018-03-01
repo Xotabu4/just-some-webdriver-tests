@@ -2,26 +2,23 @@ let WAIT_TIMEOUT = 10000 // ms
 
 function TEST() {
     let counter = 0
-    let count = () => {
-        counter++
-    }
-
-    browser.get('/').then(count)
+    let count = () => counter++
+    browser.getSession().then((id) => {
+        console.log('Session id is', id.id_)
+    })
+    browser.get('/').then(count).then(() => console.log('Page opened'))
 
     // Promo appears randomly
     let promo = $('[id*="promo-lightbox"] span[class*="close-on-click"]')
     browser.wait(protractor.ExpectedConditions.visibilityOf(promo), 1500)
-        .then(()=> promo.click(), err => { /* nothing to do, promo not appear*/})
+        .then(() => promo.click(), err => { /* nothing to do, promo not appear*/ })
 
     // Just to make more dummy calls
-    $$('div').each(div => {
-        div.getAttribute('class').then(count)
-    })
+    $$('div').each(div => div.getAttribute('class').then(count))
 
-    $('#SearchbarForm-submitBtn').click().then(count).then(()=> {
-        // due to async nature of webdriverjs
-        console.time('wait for results took')
-    })
+    $('#SearchbarForm-submitBtn').click()
+        .then(count)
+        .then(() => console.time('wait for results took'))
 
     function waitResultsWithCounter() {
         count()

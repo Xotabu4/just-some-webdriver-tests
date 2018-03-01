@@ -4,7 +4,7 @@ exports.config = {
     seleniumAddress: process.env.SELENOID_URL || 'http://ip-5236.sunline.net.ua:4444/wd/hub',
     baseUrl: 'https://www.thomascook.com/',
     specs: ['./tests/*.js'],
-    
+
     SELENIUM_PROMISE_MANAGER: true,
 
     // Create new browser session for each test
@@ -16,11 +16,16 @@ exports.config = {
 
     capabilities: {
         browserName: 'chrome',
-        // enableVNC: true,
+        //enableVNC: true,
         shardTestFiles: true,
         maxInstances: process.env.TESTS_NUM || 2, // Number of test threads
-        // name: 'AWS LAMBDA'
+        //name: 'Oleksandr Khotemskyi',
+        //screenResolution: "2000x1080",
+        enableVideo: true,
+        // videoName: 'my_video.mp4'
     },
+
+    // delete video - curl -X DELETE http://localhost:4444/video/116755a6019a5ccf9b227a0861d304e7.mp4
 
     afterLaunch: function (exitCode) {
         console.timeEnd('protractor took')
