@@ -13,12 +13,12 @@ Test logic itself is located in `./test.js`.
 - `npm install`
 
 Then most important:
-- `TESTS_NUM=2 SELENOID_URL="http://ip-5236.sunline.net.ua:4444/wd/hub" npm test`
+- `TESTS_NUM=2 SELENIUM_ADDRESS="http://localhost:4444/wd/hub" npm test`
 
 Two environment variables supported:
 
 - TESTS_NUM - set this environment variable to generate specific number of tests (2 by default). This value is also used as test threads
-- SELENOID_URL - your selenoid server URL (or selenium hub). My own selenoid server is used by default - 'http://ip-5236.sunline.net.ua:4444/wd/hub'
+- SELENIUM_ADDRESS - your selenoid server URL (or selenium hub). Localhost server is used by default - 'http://localhost:4444/wd/hub'
 
 Test files removed, and regenerated on each `npm test`
 

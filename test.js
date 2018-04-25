@@ -1,34 +1,14 @@
-let WAIT_TIMEOUT = 10000 // ms
+async function TEST() {
+    let goneMessage = element(By.cssContainingText('p#message', `It's gone!`))
+    let button = $('button#btn')
 
-function TEST() {
-    let counter = 0
-    let count = () => counter++
-    browser.getSession().then((id) => {
-        console.log('Session id is', id.id_)
-    })
-    browser.get('/').then(count).then(() => console.log('Page opened'))
-
-    // Promo appears randomly
-    let promo = $('[id*="promo-lightbox"] span[class*="close-on-click"]')
-    browser.wait(protractor.ExpectedConditions.visibilityOf(promo), 1500)
-        .then(() => promo.click(), err => { /* nothing to do, promo not appear*/ })
-
-    // Just to make more dummy calls
-    $$('div').each(div => div.getAttribute('class').then(count))
-
-    $('#SearchbarForm-submitBtn').click()
-        .then(count)
-        .then(() => console.time('wait for results took'))
-
-    function waitResultsWithCounter() {
-        count()
-        return $$('article.PackageCard').count().then(packages => packages == 10)
-    }
-
-    return browser.wait(waitResultsWithCounter, WAIT_TIMEOUT).then(() => {
-        console.timeEnd('wait for results took')
-        console.log('Did at least', counter, 'requests to browser')
-    })
+    await browser.waitForAngularEnabled(false) // Before navigating to non-angular page
+    await browser.get('http://the-internet.herokuapp.com/dynamic_controls') // second optional param - page load timeout
+    expect(await goneMessage.isPresent()).toBe(false)
+    await button.click()
+    await browser.wait(protractor.ExpectedConditions.visibilityOf(goneMessage), 10000)
+    expect(await goneMessage.isPresent()).toBe(true)
+    console.log('Got text:', await goneMessage.getText())
 }
 
 exports.TEST = TEST;

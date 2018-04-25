@@ -1,14 +1,11 @@
 
 console.time('Test run took')
 exports.config = {
-    seleniumAddress: process.env.SELENOID_URL || 'http://ip-5236.sunline.net.ua:4444/wd/hub',
+    seleniumAddress: process.env.SELENIUM_ADDRESS || 'http://localhost:4444/wd/hub',
     baseUrl: 'https://www.thomascook.com/',
     specs: ['./tests/*.js'],
 
-    SELENIUM_PROMISE_MANAGER: true,
-
-    // Create new browser session for each test
-    restartBrowserBetweenTests: true,
+    SELENIUM_PROMISE_MANAGER: false,
 
     jasmineNodeOpts: {
         defaultTimeoutInterval: 60000 * 3 // 3 mins
@@ -21,7 +18,7 @@ exports.config = {
         maxInstances: process.env.TESTS_NUM || 2, // Number of test threads
         //name: 'Oleksandr Khotemskyi',
         //screenResolution: "2000x1080",
-        enableVideo: true,
+        // enableVideo: true,
         // videoName: 'my_video.mp4'
     },
 
