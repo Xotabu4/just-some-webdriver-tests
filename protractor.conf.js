@@ -13,7 +13,7 @@ exports.config = {
 
     capabilities: {
         browserName: 'chrome',
-        //enableVNC: true,
+        enableVNC: true,
         shardTestFiles: true,
         maxInstances: process.env.TESTS_NUM || 2, // Number of test threads
         //name: 'Oleksandr Khotemskyi',

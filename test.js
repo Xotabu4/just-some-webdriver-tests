@@ -1,6 +1,6 @@
 async function TEST() {
     let goneMessage = element(By.cssContainingText('p#message', `It's gone!`))
-    let button = $('button#btn')
+    let button = $('#checkbox-example button')
 
     await browser.waitForAngularEnabled(false) // Before navigating to non-angular page
     await browser.get('http://the-internet.herokuapp.com/dynamic_controls') // second optional param - page load timeout
@@ -12,3 +12,9 @@ async function TEST() {
 }
 
 exports.TEST = TEST;
+
+// let repeat = `while true
+// do 
+//     TESTS_NUM=60 SELENIUM_ADDRESS="http://xotabu4pc:4444/wd/hub" npm test
+//     sleep 5
+// done`
