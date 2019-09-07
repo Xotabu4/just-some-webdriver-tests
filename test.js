@@ -1,20 +1,47 @@
 async function TEST() {
-    let goneMessage = element(By.cssContainingText('p#message', `It's gone!`))
-    let button = $('#checkbox-example button')
-
-    await browser.waitForAngularEnabled(false) // Before navigating to non-angular page
-    await browser.get('http://the-internet.herokuapp.com/dynamic_controls') // second optional param - page load timeout
-    expect(await goneMessage.isPresent()).toBe(false)
-    await button.click()
-    await browser.wait(protractor.ExpectedConditions.visibilityOf(goneMessage), 10000)
-    expect(await goneMessage.isPresent()).toBe(true)
-    console.log('Got text:', await goneMessage.getText())
+    await browser.waitForAngularEnabled(false);
+    await browser.get("/dynamic_controls");
+    const goneMessage = element(
+        By.cssContainingText("p#message", `It's gone!`)
+    );
+    expect(await goneMessage.isPresent()).toBe(false);
+    await $("#checkbox-example button").click();
+    let counter = 0;
+    console.log("Starting wait");
+    try {
+        await browser.wait(async function() {
+            try {
+                console.log("Iteration number: ", counter);
+                counter = counter + 1;
+                const res = await goneMessage.isDisplayed();
+                return res;
+            } catch (err) {
+                return false;
+            }
+        }, 10000);
+    } catch (err) {
+        console.log("Wait finished due to timeout!");
+        console.log(err);
+    }
+    console.log("Wait finished successfully!");
+    expect(await goneMessage.isDisplayed()).toBe(true);
+    console.log("Got text:", await goneMessage.getText());
 }
 
 exports.TEST = TEST;
 
-// let repeat = `while true
-// do 
-//     TESTS_NUM=60 SELENIUM_ADDRESS="http://xotabu4pc:4444/wd/hub" npm test
-//     sleep 5
-// done`
+await browser.wait(
+    // 1 - Condition to wait for
+    async function() {
+        try {
+            const res = await goneMessage.isDisplayed();
+            return res;
+        } catch (err) {
+            return false;
+        }
+    },
+    // 2 - How long to keep asking for condition to became true
+    10000,
+    // 3 - Error message, in case condition never reached
+    `Optional error message instead default WaitTimeout message`
+);

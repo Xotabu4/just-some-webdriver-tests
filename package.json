@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Xotabu4/just-some-webdriver-tests#readme",
   "dependencies": {
-    "protractor": "5.3.1"
+    "protractor": "5.4.2",
+    "protractor-element-extend": "*"
   }
 }

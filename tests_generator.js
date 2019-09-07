@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const TESTS_FOLDER = './tests'
-const TESTS_TO_GENERATE = process.env.TESTS_NUM || 2
+const TESTS_TO_GENERATE = process.env.TESTS_NUM || 1
 
 let files = fs.readdirSync(TESTS_FOLDER)
 console.log('Cleaning up generated tests ...')
@@ -26,7 +26,7 @@ describe('SUITE ${index}', function () {
 })
 `
     fs.writeFileSync(`${TESTS_FOLDER}/test_${index}.js`, testFileTemplate, { flag: 'w+' })
-    index += 1
+    index = index + 1
 }
 console.log('Generated', TESTS_TO_GENERATE, 'tests')
 
